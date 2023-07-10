@@ -1,0 +1,81 @@
+        *************** Beginning of data *************************************
+0001.00 FDSSALARY  CF   E             WORKSTN                                  
+0002.00 F                                     SFILE(SFLMON:RRN)                
+0003.00 F                                     SFILE(SFLTOTAL:RRN)              
+0004.00 DDAYS             S              3    DIM(5) CTDATA PERRCD(5)          
+0005.00 DMONTHS           S              3    DIM(12) CTDATA PERRCD(3)         
+0006.00 C*---------------------------------------------------------------------
+0007.00 C                   EXSR      INITSFL                                  
+0008.00 C     *IN03         DOWEQ     *OFF                                     
+0009.00 C                   EXSR      LOADSCN                                  
+0010.00 C                   EXFMT     CTLMON                                   
+0011.00 C                   SELECT                                             
+0012.00 C     *IN05         WHENEQ    *ON                                      
+0013.00 C                   EXSR      FILLSFL                                  
+0014.00 C     *IN08         WHENEQ    *ON                                      
+0015.00 C                   EXSR      CALCSLRY                                 
+0016.00 C                   SETON                                        3748  
+0017.00 C                   EXSR      LOADSCN                                  
+0018.00 C                   EXFMT     CTLTOTAL                                 
+0019.00 C                   SETOFF                                       48    
+0020.00 C                   ENDSL                                              
+0021.00 C                   ENDDO                                              
+0022.00 C                   SETON                                        LR    
+0023.00 C*---------------------------------------------------------------------
+0024.00 C     INITSFL       BEGSR                                              
+0025.00 C                   MOVE      DAYS(1)       FL01                       
+0026.00 C                   MOVE      DAYS(2)       FL02                       
+0027.00 C                   MOVE      DAYS(3)       FL03                       
+0028.00 C                   MOVE      DAYS(4)       FL04                       
+0029.00 C                   MOVE      DAYS(5)       FL05                       
+0030.00 C                   EXSR      FILLSFL                                  
+0031.00 C                   ENDSR                                              
+0032.00 C*---------------------------------------------------------------------
+0033.00 C     FILLSFL       BEGSR                                               
+0034.00 C                   SETOFF                                       31     
+0035.00 C                   SETON                                        32     
+0036.00 C                   WRITE     CTLMON                                    
+0037.00 C     1             DO        12            RRN               2 0       
+0038.00 C                   MOVE      MONTHS(RRN)   MON                         
+0039.00 C                   MOVE      *ZERO         DAYP1                       
+0040.00 C                   MOVE      *ZERO         DAYP2                       
+0041.00 C                   MOVE      *ZERO         DAYP3                       
+0042.00 C                   MOVE      *ZERO         DAYP4                       
+0043.00 C                   MOVE      *ZERO         DAYP5                       
+0044.00 C                   WRITE     SFLMON                                    
+0045.00 C                   ENDDO                                               
+0046.00 C                   SETON                                        31     
+0047.00 C                   ENDSR                                               
+0048.00 C*--------------------------------------------------------------------- 
+0049.00 C     CALCSLRY      BEGSR                                         
+0050.00 C                   SETOFF                                       3
+0051.00 C                   SETON                                        3
+0052.00 C                   WRITE     CTLTOTAL                            
+0053.00 C                   Z-ADD     0             YRTOTAL           7 0 
+0054.00 C     1             DO        12            RRN                   
+0055.00 C     RRN           CHAIN     SFLMON                              
+0056.00 C                   Z-ADD     0             MNTTOTAL          5 0 
+0057.00 C                   ADD       DAYP1         MNTTOTAL              
+0058.00 C                   ADD       DAYP2         MNTTOTAL              
+0059.00 C                   ADD       DAYP3         MNTTOTAL              
+0060.00 C                   ADD       DAYP4         MNTTOTAL              
+0061.00 C                   ADD       DAYP5         MNTTOTAL              
+0062.00 C                   ADD       MNTTOTAL      YRTOTAL               
+0063.00 C                   WRITE     SFLTOTAL                            
+0064.00 C                   ENDDO                                         
+0065.00 C                   SETON                                        36    
+0066.00 C                   ENDSR                                              
+0067.00 C*---------------------------------------------------------------------
+0068.00 C     LOADSCN       BEGSR                                              
+0069.00 C                   WRITE     MAIN                                     
+0070.00 C                   WRITE     FUNCK                                    
+0071.00 C                   ENDSR                                              
+0072.00 C*---------------------------------------------------------------------
+0073.00 ** CTDATA DAYS                                                         
+0074.00 SUNMONTUEWEDTHU                                                        
+0075.00 ** CTDATA MONTHS                                                       
+0076.00 JANFEBMAR                                                              
+0077.00 APRMAYJUN                                                              
+0078.00 JULAUGSEP                                                              
+0079.00 OCTNOVDEC                                                              
+        ****************** End of data ****************************************
