@@ -1,0 +1,75 @@
+        *************** Beginning of data ************************************
+0000.10      A*%%TS  SD  20230511  074952  JBLTD10     REL-V7R5M0  5770-WDS   
+0000.20      A*%%EC                                                           
+0000.30      A                                      DSPSIZ(24 80 *DS3)        
+0000.40      A                                      CA03(03 'EXIT')           
+0000.50      A                                      CF08(08 'CALC SALARY')    
+0000.60      A                                      CF05(05 'RESET')          
+0000.70      A*-------------------------------------------------------------- 
+0000.80      A          R MAIN                                                
+0000.90      A*%%TS  SD  20230511  074952  JBLTD10     REL-V7R5M0  5770-WDS   
+0001.00      A                                      OVERLAY                   
+0001.10      A                                  3 29'SALARY MANAGEMENT SYSTEM'
+0001.20      A                                      COLOR(YLW)                
+0001.30      A*-------------------------------------------------------------- 
+0001.40      A          R FUNCK                                               
+0001.50      A*%%TS  SD  20230511  074556  JBLTD10     REL-V7R5M0  5770-WDS   
+0001.60      A                                      OVERLAY           
+0001.70      A                                 22  1'--------------------------
+0001.80      A                                      ---------------------------
+0001.90      A                                      -----------'               
+0002.00      A N48                             23  2'F3=Exit   F5=Reset   F8=Display Su-
+0002.10      A                                      mmary'                     
+0002.20      A                                      COLOR(WHT)                 
+0002.30      A  48                             23  2'F3=Exit'                  
+0002.40      A                                      COLOR(BLU)                 
+0002.50      A*--------------------------------------------------------------  
+0002.60      A          R SFLMON                    SFL                        
+0002.70      A*%%TS  SD  20230511  074556  JBLTD10     REL-V7R5M0  5770-WDS    
+0002.80      A            DAYP1          3Y 0B  7 11EDTCDE(Z)                  
+0002.90      A                                      COLOR(YLW)                 
+0003.00      A            DAYP2          3Y 0B  7 19EDTCDE(Z)                  
+0003.10      A                                      COLOR(YLW)                 
+0003.20      A            DAYP3          3Y 0B  7 27EDTCDE(Z)                  
+0003.30      A                                      COLOR(YLW)               
+0003.40      A            DAYP4          3Y 0B  7 35EDTCDE(Z)                
+0003.50      A                                      COLOR(YLW)               
+0003.60      A            DAYP5          3Y 0B  7 43EDTCDE(Z)                
+0003.70      A                                      COLOR(YLW)               
+0003.80      A            MON            3A  O  7  5                         
+0003.90      A*--------------------------------------------------------------
+0004.00      A          R CTLMON                    SFLCTL(SFLMON)           
+0004.10      A                                      OVERLAY                  
+0004.20      A  31                                  SFLDSP                   
+0004.30      A  32                                  SFLDSPCTL                
+0004.40      A N31                                  SFLCLR                   
+0004.50      A                                      SFLSIZ(0012)             
+0004.60      A                                      SFLPAG(0012)             
+0004.70      A            FL01           3A  O  6 11                         
+0004.80      A            FL02           3A  O  6 19    
+0004.90      A            FL03           3A  O  6 27                         
+0005.00      A            FL04           3A  O  6 35                         
+0005.10      A            FL05           3A  O  6 43                         
+0005.20      A*------------------------------------------------------------- 
+0005.30      A          R SFLTOTAL                  SFL                      
+0005.40      A            MON            3A  O  5  2                         
+0005.50      A                                  5  6':'                      
+0005.60      A            MNTTOTAL       5Y 0O  5  8EDTCDE(Z)                
+0005.70      A*--------------------------------------------------------------
+0005.80      A          R CTLTOTAL                  SFLCTL(SFLTOTAL)         
+0005.90      A*%%TS  SD  20230511  074952  JBLTD10     REL-V7R5M0  5770-WDS  
+0006.00      A                                      SFLSIZ(0012)             
+0006.10      A                                      SFLPAG(0012)             
+0006.20      A                                      WINDOW(2 50 18 24)       
+0006.30      A                                      OVERLAY                  
+0006.40      A  36                                  SFLDSP           
+0006.50      A  37                                  SFLDSPCTL                   
+0006.60      A N36                                  SFLDLT                      
+0006.70      A                                      WDWBORDER((*COLOR BLU) (*CHAR 'X-X|- 
+0006.80      A                                      |X-X'))                     
+0006.90      A                                  1  6'SALARY SUMMARY'            
+0007.00      A                                      DSPATR(UL)                  
+0007.10      A                                      COLOR(YLW)                  
+0007.20      A                                  3  2'Yearly Total:'             
+0007.30      A            YRTOTAL        7Y 0O  3 16EDTCDE(Z)                   
+        ****************** End of data **************************************** 
